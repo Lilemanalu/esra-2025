@@ -28,7 +28,7 @@
       result.innerHTML = "🔎 Mencari data...";
 
       // GANTI URL DI SINI dengan URL Google Apps Script kamu
-      const url = `https://script.google.com/macros/s/AKfycbzk8aMY6K4obdEkjxTp4sTcC1QeOO964t90n3vwJeNk23ciEr45kSgXXlgtGthHlyOwVQ/exec`;
+      const url = `https://script.google.com/macros/s/AKfycbzk8aMY6K4obdEkjxTp4sTcC1QeOO964t90n3vwJeNk23ciEr45kSgXXlgtGthHlyOwVQ/exec?nh=${nh}`;
 
       try {
         const res = await fetch(url);
