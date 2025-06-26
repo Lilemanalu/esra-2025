@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cek Nomor Meja</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    input { padding: 8px; width: 200px; }
+    button { padding: 8px 12px; }
+  </style>
+</head>
+<body>
+  <h2>Cek Meja & Manhaul</h2>
+  <p>Masukkan Nomor Harian (NH):</p>
+  <input type="text" id="nhInput" placeholder="Contoh: NH001">
+  <button onclick="cariData()">Cari</button>
+  <div id="result" style="margin-top: 20px;"></div>
+
+  <script>
+    async function cariData() {
+      const nh = document.getElementById("nhInput").value.trim();
+      const result = document.getElementById("result");
+      if (!nh) {
+        result.innerHTML = "Masukkan NH terlebih dahulu.";
+        return;
+      }
+
+      result.innerHTML = "🔎 Mencari data...";
+
+      // GANTI URL DI SINI dengan URL Google Apps Script kamu
+      const url = `https://script.google.com/macros/s/AKfycbzk8aMY6K4obdEkjxTp4sTcC1QeOO964t90n3vwJeNk23ciEr45kSgXXlgtGthHlyOwVQ/exec`;
+
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+
+        if (data.found) {
+          result.innerHTML = `
+            ✅ Ditemukan:<br>
+            Nama: ${data.nama}<br>
+            Manhaul: ${data.manhaul}<br>
+            Meja: ${data.meja}
+          `;
+        } else {
+          result.innerHTML = "❌ NH tidak ditemukan.";
+        }
+      } catch (err) {
+        result.innerHTML = "⚠️ Gagal menghubungi server.";
+      }
+    }
+  </script>
+</body>
+</html>
